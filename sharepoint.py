@@ -5,7 +5,7 @@ from office365.sharepoint.client_context import ClientContext
 from office365.sharepoint.files.file import File
 
 site_url = 'https://repay.sharepoint.com/sites/Certifikathantering'
-sharepoint_folder_url = "/sites/Certifikathantering/Kvartal%201%202024"
+sharepoint_folder_url = "/sites/Certifikathantering/Kvartal%202%202024"
 local_folder_path = 'certificates'
 
 # Load environment variables from .env file

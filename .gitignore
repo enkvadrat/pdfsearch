@@ -1,0 +1,4 @@
+ .env
+.venv/
+certificate_texts.json
+certificates/

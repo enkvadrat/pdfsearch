@@ -10,8 +10,7 @@ def extract_text_from_pdf(pdf_path):
             page = pdf_document.load_page(page_num)
             text += page.get_text()
     except Exception as e:
-        # make it not say procced and say that it procceced it if it failed?
-        print(f"Error reading {pdf_path}: {e}")
+        print(f"Error processing {pdf_path}: {e}")
     return text
 
 def process_pdfs(pdf_directory, output_file):
@@ -21,11 +20,12 @@ def process_pdfs(pdf_directory, output_file):
             if file.endswith('.pdf'):
                 pdf_path = os.path.join(root, file)
                 text = extract_text_from_pdf(pdf_path)
-                pdf_texts[pdf_path] = text
+                if text:
+                    pdf_texts[pdf_path] = text
                 print(f"Processed {pdf_path}")
 
     with open(output_file, 'w') as f:
-        json.dump(pdf_texts, f)
+        json.dump(pdf_texts, f, indent=4)
 
 if __name__ == "__main__":
     pdf_directory = "certificates"
