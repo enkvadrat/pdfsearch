@@ -2,6 +2,10 @@ import os
 import json
 import fitz  # PyMuPDF
 
+# color printing
+from rich.console import Console
+console = Console()
+
 def extract_text_from_pdf(pdf_path):
     text = ""
     try:
@@ -10,7 +14,7 @@ def extract_text_from_pdf(pdf_path):
             page = pdf_document.load_page(page_num)
             text += page.get_text()
     except Exception as e:
-        print(f"Error processing {pdf_path}: {e}")
+        console.print(f"Error processing {pdf_path}: {e}", style="red")
     return text
 
 def process_pdfs(pdf_directory, output_file):
@@ -22,7 +26,10 @@ def process_pdfs(pdf_directory, output_file):
                 text = extract_text_from_pdf(pdf_path)
                 if text:
                     pdf_texts[pdf_path] = text
-                print(f"Processed {pdf_path}")
+                    console.print(f"Processed {pdf_path}")
+                else:
+                    console.print(f"No text found in {pdf_path}", style="yellow")
+                
 
     with open(output_file, 'w') as f:
         json.dump(pdf_texts, f, indent=4)
