@@ -1,0 +1,50 @@
+body {
+  background-color: #121419;
+  color: #ffffff;
+}
+
+.container {
+  margin-top: 50px;
+}
+
+h1,
+label {
+  color: #e05920;
+}
+
+.form-control,
+.btn,
+.list-group-item {
+  background-color: #161a1f;
+  color: #ffffff;
+  border: 1px solid #e05920;
+}
+
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #e05920;
+  border-color: #e05920;
+}
+
+.btn-secondary,
+.btn-secondary:hover,
+.btn-secondary:focus {
+  background-color: #e05920;
+  border-color: #e05920;
+}
+
+.list-group-item {
+  border-color: #e05920;
+}
+
+.list-group-item a {
+  color: #e05920;
+}
+
+.highlight {
+  background-color: #e05920;
+  color: #121419;
+  padding: 2px;
+  border-radius: 3px;
+}
