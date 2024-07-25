@@ -1,6 +1,8 @@
 import os
 import json
 import fitz  # PyMuPDF
+from PIL import Image # pillow
+import pytesseract
 
 # color printing
 from rich.console import Console
@@ -15,6 +17,7 @@ def extract_text_from_pdf(pdf_path):
             text += page.get_text()
     except Exception as e:
         console.print(f"Error processing {pdf_path}: {e}", style="red")
+        text = "error"
     return text
 
 def process_pdfs(pdf_directory, output_file):
@@ -24,17 +27,20 @@ def process_pdfs(pdf_directory, output_file):
             if file.endswith('.pdf'):
                 pdf_path = os.path.join(root, file)
                 text = extract_text_from_pdf(pdf_path)
-                if text:
-                    pdf_texts[pdf_path] = text
-                    console.print(f"Processed {pdf_path}")
-                else:
+                if not text:
                     console.print(f"No text found in {pdf_path}", style="yellow")
-                
+                    #import ocr
+                    text = "image " #+ ocr.extract_text_from_pdf(pdf_path)
+
+                pdf_texts[pdf_path] = text
+                console.print(f"Processed {pdf_path}")
+
 
     with open(output_file, 'w') as f:
         json.dump(pdf_texts, f, indent=4)
 
+
 if __name__ == "__main__":
-    pdf_directory = "certificates"
-    output_file = "certificate_texts.json"
-    process_pdfs(pdf_directory, output_file)
+    import config
+    output_file = config.certificate_json_file
+    process_pdfs(config.certificate_folder, output_file)

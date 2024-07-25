@@ -4,9 +4,10 @@ from office365.runtime.auth.authentication_context import AuthenticationContext
 from office365.sharepoint.client_context import ClientContext
 from office365.sharepoint.files.file import File
 
-site_url = 'https://repay.sharepoint.com/sites/Certifikathantering'
-sharepoint_folder_url = "/sites/Certifikathantering/Kvartal%202%202024"
-local_folder_path = 'certificates'
+import config 
+site_url = config.site_url
+sharepoint_folder_url = config.sharepoint_folder_url
+local_folder_path = config.certificate_folder
 
 # Load environment variables from .env file
 load_dotenv()

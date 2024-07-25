@@ -14,6 +14,7 @@ def create_search_index(index_dir, json_file):
     with open(json_file, 'r') as f:
         pdf_texts = json.load(f)
         for path, content in pdf_texts.items():
+            print(f"indexed: {path}")
             writer.add_document(path=path, content=content)
     writer.commit()
 
@@ -31,12 +32,11 @@ def search_index(index_dir, query_str):
     return results
 
 if __name__ == "__main__":
-    index_dir = "index"
-    json_file = "certificate_texts.json"
+    import config
     # need chaning so it only gets created if json_file changes
-    create_search_index(index_dir, json_file)
+    create_search_index(config.index, config.certificate_json_file)
     
     # Example search
     query_str = "Test"
-    results = search_index(index_dir, query_str)
+    results = search_index(config.index, query_str)
     print(f"Found in files: {results}")
