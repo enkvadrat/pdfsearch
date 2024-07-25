@@ -7,8 +7,9 @@ pip install -r requirements.txt
 ```
 add .env file with the credentials to sharepoint
 in the form of 
-  USERNAME=
-  PASSWORD=
+
+    USERNAME=
+    PASSWORD=
 
 ## start the local server
 ```
