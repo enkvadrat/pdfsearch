@@ -1,5 +1,5 @@
 certificate_folder = 'certificates'
-certificate_json_file = 'certificate_texts.json'
-index = 'index'
+certificate_db_file = 'certificate.db'
 site_url = 'https://repay.sharepoint.com/sites/Certifikathantering'
-sharepoint_folder_url = "/sites/Certifikathantering/Kvartal%202%202024"
+sharepoint_folder_url = "/sites/Certifikathantering/Kvartal 1 2022"
+

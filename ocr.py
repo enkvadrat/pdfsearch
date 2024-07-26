@@ -20,7 +20,7 @@ def extract_text_from_pdf(pdf_path):
 
                 image = Image.open(io.BytesIO(image_bytes))
 
-                text = pytesseract.image_to_string(image)
+                text = pytesseract.image_to_string(image, lang='eng+swe+deu+fra')
                 full_text += text
         
                 print(f"Page {page_num + 1}, Image {img_index + 1}:")
@@ -30,3 +30,9 @@ def extract_text_from_pdf(pdf_path):
     except:
         print(f"failed to scan {pdf_path}")
         return "fail"
+
+if __name__ == "__main__":
+    pdf = input("PDF PATH: ")
+    extract_text_from_pdf(pdf)
+
+

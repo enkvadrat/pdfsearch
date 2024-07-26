@@ -1,4 +1,5 @@
  .env
 .venv/
-certificate_texts.json
+certificates.db
 certificates/
+__pycache__
