@@ -37,12 +37,15 @@ def download_files_from_folder(folder_url, local_path):
             download_path = os.path.join(local_path, file.name)
             if not os.path.exists(download_path):
                 # File does not exist locally, proceed with download
-                with open(download_path, "wb") as local_file:
-                    file_data = File.open_binary(ctx, file.serverRelativeUrl)
-                    local_file.write(file_data.content)
-                print(f"Downloaded: {file.name}")
+                try:
+                    with open(download_path, "wb") as local_file:
+                        file_data = File.open_binary(ctx, file.serverRelativeUrl)
+                        local_file.write(file_data.content)
+                    print(f"Downloaded: {file.name}")
+                except Exception as e:
+                    print(f"Failed to download {file.name}: {e}")
             else:
-                print(f"Skipped (already exists): {file.name}")
+                print(f"Skipped (already exists): {file.name}")    
 
     sub_folders = folder.folders
     ctx.load(sub_folders)
