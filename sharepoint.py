@@ -5,6 +5,7 @@ from office365.sharepoint.client_context import ClientContext
 from office365.sharepoint.files.file import File
 
 import config 
+
 site_url = config.site_url
 sharepoint_folder_url = config.sharepoint_folder_url
 local_folder_path = config.certificate_folder
@@ -34,10 +35,14 @@ def download_files_from_folder(folder_url, local_path):
     for file in files:
         if file.name.endswith('.pdf'):
             download_path = os.path.join(local_path, file.name)
-            with open(download_path, "wb") as local_file:
-                file_data = File.open_binary(ctx, file.serverRelativeUrl)
-                local_file.write(file_data.content)
-            print(f"Downloaded: {file.name}")
+            if not os.path.exists(download_path):
+                # File does not exist locally, proceed with download
+                with open(download_path, "wb") as local_file:
+                    file_data = File.open_binary(ctx, file.serverRelativeUrl)
+                    local_file.write(file_data.content)
+                print(f"Downloaded: {file.name}")
+            else:
+                print(f"Skipped (already exists): {file.name}")
 
     sub_folders = folder.folders
     ctx.load(sub_folders)
