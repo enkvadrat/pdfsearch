@@ -49,11 +49,12 @@ def pdf_view(filename):
 def update_pdf(hours:int=1):
     import extract
     import index
+    import sharepoint
 
     while True:
 
-        # download pdfs
-        import sharepoint
+        # download new pdf
+        sharepoint.main()
 
         extract.process_pdfs(config.certificate_folder,config.certificate_json_file)
 
