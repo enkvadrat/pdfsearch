@@ -1,5 +1,5 @@
- .env
+.env
 .venv/
-certificates.db
+certificate.db
 certificates/
 __pycache__
