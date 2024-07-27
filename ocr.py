@@ -29,7 +29,7 @@ def extract_text_from_pdf(pdf_path):
         return full_text
     except:
         print(f"failed to scan {pdf_path}")
-        return "fail"
+        return "ocrfail"
 
 if __name__ == "__main__":
     pdf = input("PDF PATH: ")

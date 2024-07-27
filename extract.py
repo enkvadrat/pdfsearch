@@ -21,10 +21,11 @@ def extract_text_from_pdf(pdf_path):
 def initialize_database(db_path):
     conn = sqlite3.connect(db_path)
     c = conn.cursor()
-    # Create FTS virtual table for full-text search
     c.execute('''
-        CREATE VIRTUAL TABLE IF NOT EXISTS pdfs
-        USING fts5(path, text)
+        CREATE VIRTUAL TABLE IF NOT EXISTS pdfs USING fts5(
+            path, 
+            text 
+        )
     ''')
     conn.commit()
     return conn
@@ -47,8 +48,8 @@ def process_pdfs(pdf_directory, db_path):
                 text = extract_text_from_pdf(pdf_path)
                 if not text:
                     console.print(f"No text found in {pdf_path}", style="yellow")
-                    import ocr
-                    text = "image " + ocr.extract_text_from_pdf(pdf_path)
+                    # import ocr
+                    text = "image " #+ ocr.extract_text_from_pdf(pdf_path)
 
                 c.execute('INSERT INTO pdfs (path, text) VALUES (?, ?)', (pdf_path, text))
                 conn.commit()
